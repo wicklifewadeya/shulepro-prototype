@@ -1,0 +1,128 @@
+/* input.module.scss
+   Nested SCSS module for the Input component.
+   Uses CSS variables so your theme system can override tokens globally.
+*/
+
+:root {
+  /* sensible defaults; override in global styles or :root */
+  --input-bg: transparent;
+  --input-foreground: #0f172a;
+  --input-bg-dark-overlay: rgba(
+    255,
+    255,
+    255,
+    0.08
+  ); /* used for dark backdrop */
+  --muted-foreground: #6b7280;
+  --border-color: rgba(15, 23, 42, 0.06);
+  --ring-color: 59, 130, 246; /* rgb for ring (blue-500) */
+  --ring-alpha: 0.5;
+  --primary: 59, 130, 246; /* rgb for primary */
+  --primary-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-rgb: 239, 68, 68;
+  --file-foreground: #0f172a;
+}
+
+/* Root input class exported by the module */
+.input {
+  /* layout & base */
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 100%;
+  min-width: 0;
+  height: 2.25rem; /* h-9 (36px) */
+  padding: 0.25rem 0.75rem; /* py-1 px-3 */
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--input-foreground);
+  font-size: 1rem; /* text-base */
+  line-height: 1.2;
+  outline: none;
+  transition: color 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); /* subtle shadow-xs */
+
+  /* file input button styling (modern & webkit prefixed) */
+  &::file-selector-button {
+    display: inline-flex;
+    align-items: center;
+    height: 1.75rem; /* file:h-7 */
+    border: 0;
+    background: transparent;
+    font-size: 0.875rem; /* file:text-sm */
+    font-weight: 500; /* file:font-medium */
+    color: var(--file-foreground);
+    padding: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  /* compatibility for older WebKit */
+  &::-webkit-file-upload-button {
+    display: inline-flex;
+    align-items: center;
+    height: 1.75rem;
+    border: 0;
+    background: transparent;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--file-foreground);
+    padding: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  /* placeholder color */
+  &::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
+  }
+
+  /* text selection */
+  &::selection {
+    background: rgba(var(--primary), 1);
+    color: var(--primary-foreground);
+  }
+
+  /* disabled state */
+  &:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  /* focus-visible (keyboard focus) */
+  &:focus-visible {
+    border-color: rgb(var(--ring-color));
+    /* ring mimic: semi-transparent outline */
+    box-shadow: 0 0 0 3px rgba(var(--ring-color), var(--ring-alpha));
+  }
+
+  /* aria-invalid state */
+  &[aria-invalid="true"],
+  &[aria-invalid="true"] * {
+    /* subtle destructive ring and border */
+    box-shadow: 0 0 0 4px rgba(var(--destructive-rgb), 0.2);
+    border-color: var(--destructive);
+  }
+
+  /* dark mode adjustments — apply by adding `dark` class to a parent (common pattern) */
+  :global(.dark) & {
+    background: rgba(255, 255, 255, 0.03); /* slight overlay */
+    color: var(--input-foreground);
+    /* emulate `dark:bg-input/30` from Tailwind by providing a semi-transparent overlay */
+    /* adjust aria-invalid ring opacity on dark */
+    &[aria-invalid="true"] {
+      box-shadow: 0 0 0 4px rgba(var(--destructive-rgb), 0.4);
+    }
+  }
+
+  /* responsive: md:text-sm (md = min-width: 768px) */
+  @media (min-width: 768px) {
+    font-size: 0.875rem;
+  }
+
+  /* Additional accessibility / helper states (kept small) */
+  &:read-only {
+    background-clip: padding-box;
+  }
+}

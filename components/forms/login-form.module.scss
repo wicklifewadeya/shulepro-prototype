@@ -1,0 +1,154 @@
+/* --------------------------------------------------------------- */
+/* --- login-form.module.scss ----------------------------------- */
+/* --------------------------------------------------------------- */
+
+:root {
+  --bg-card: #ffffff;
+  --muted-foreground: #6b7280;
+  --border: #e5e7eb;
+  --primary: #6366f1;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* tailwind gap-6 */
+
+  /* Card header + its children */
+  .cardHeader {
+    text-align: center;
+
+    .cardTitle {
+      font-size: 1.25rem; /* text-xl */
+      margin: 0;
+    }
+
+    .cardDescription {
+      color: var(--muted-foreground);
+    }
+  }
+
+  .cardContent {
+    padding-top: 0.5rem;
+  }
+
+  .formSpacing {
+    & > * + * {
+      margin-top: 2rem; /* space-y-8 */
+    }
+  }
+
+  /* layout replaces generic "grid" name for clarity */
+  .layout {
+    display: grid;
+    gap: 1.5rem; /* gap-6 */
+
+    /* smaller groups inside the layout */
+    .fieldGroup {
+      display: grid;
+      gap: 0.75rem; /* gap-3 */
+    }
+  }
+
+  /* column used for grouping form controls */
+  .formColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    /* "Forgot password?" link sits inside this column */
+    .forgotPasswordLink {
+      margin-left: auto;
+      font-size: 0.875rem;
+      color: rgb(131, 131, 131);
+      transition: all 0.5s;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        font-style: italic;
+        letter-spacing: 0.5;
+      }
+    }
+  }
+
+  /* tighter column used for the Google button area */
+  .compactColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* slightly tighter */
+  }
+
+  .fullWidth {
+    width: 100%;
+  }
+
+  /* divider with centered span */
+  .divider {
+    position: relative;
+    text-align: center;
+    font-size: 0.875rem; /* text-sm */
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      border-top: 1px solid var(--border);
+      z-index: 0;
+    }
+
+    span {
+      background: var(--bg-card);
+      position: relative;
+      z-index: 1;
+      padding: 0 0.5rem;
+      color: var(--muted-foreground);
+    }
+  }
+
+  /* sign-up prompt text area */
+  // .signupText {
+  //   text-align: center;
+  //   font-size: 0.875rem;
+
+  //   .signupLink {
+  //     text-decoration: underline;
+  //     text-underline-offset: 4px;
+  //   }
+  // }
+
+  /* legal text under the card */
+  .legal {
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    text-align: center;
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    a:hover {
+      color: var(--primary);
+    }
+  }
+
+  /* small helpers */
+  .size4 {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .loader {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

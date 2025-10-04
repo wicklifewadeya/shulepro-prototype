@@ -1,0 +1,101 @@
+/* --------------------------------------------------------- */
+/* File: button.module.scss                                     */
+
+/*
+  Nested SCSS classes. This file uses SCSS nesting and CSS
+  Modules naming. Class names referenced from the TSX file are:
+  - styles.button
+  - styles.size-sm | size-md | size-lg
+  - styles.variant-primary | variant-ghost
+  - optional user-provided className (string)
+*/
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0.375rem; // 6px
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.08s ease;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Sizes (nested) */
+  &.size-sm {
+    height: 2rem; /* 32px */
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  &.size-md {
+    height: 2.5rem; /* 40px */
+    padding: 0 1rem;
+    font-size: 1rem;
+  }
+
+  &.size-lg {
+    height: 3rem; /* 48px */
+    padding: 0 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  /* Variants (nested) */
+  &.variant-primary {
+    background-color: #2563eb; /* blue-600 */
+    color: #ffffff;
+
+    &:hover:not(:disabled) {
+      background-color: #1e40af; /* blue-700 */
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+  }
+
+  &.variant-ghost {
+    background: transparent;
+    color: #111827; /* gray-900-ish */
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(17, 24, 39, 0.03);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.05);
+    }
+  }
+
+  /* icon helper nested inside the button scope */
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+
+    /* make svg icons align with text and inherit font-size */
+    svg {
+      width: 1em;
+      height: 1em;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+/* CSS Module for Card components.
+   Uses CSS variables so theme tokens can be overridden in parent/global CSS.
+*/
+
+:root {
+  --card-bg: #ffffff;
+  --card-foreground: #0f172a;
+  --card-border: rgba(15, 23, 42, 0.06);
+  --muted-foreground: #6b7280;
+}
+
+/* Outer card */
+.card {
+  background: var(--card-bg);
+  color: var(--card-foreground);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* equivalent to gap-6 */
+  border-radius: 0.75rem; /* rounded-xl */
+  border: 1px solid var(--card-border);
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04); /* subtle shadow-sm */
+  overflow: visible;
+}
+
+/* Header area */
+.cardHeader {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-rows: auto auto;
+  align-items: start;
+  gap: 0.375rem; /* gap-1.5 */
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem;
+  /* If the header contains an element with data-slot="card-action", make two columns:
+     1fr and auto (same behavior as the original Tailwind :has usage). */
+  /* Uses :has — modern browsers only; fallback is single-column. */
+  @supports selector(:has(*)) {
+    &:has([data-slot="card-action"]) {
+      grid-template-columns: 1fr auto;
+    }
+  }
+}
+
+/* Title */
+.cardTitle {
+  line-height: 1; /* leading-none */
+  font-weight: 600; /* font-semibold */
+  margin: 0;
+}
+
+/* Description */
+.cardDescription {
+  color: var(--muted-foreground);
+  font-size: 0.875rem; /* text-sm */
+  margin: 0;
+}
+
+/* Action placed in header (positioning inside the header grid) */
+.cardAction {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+  align-self: start; /* self-start */
+  justify-self: end; /* justify-self-end */
+}
+
+/* Content area */
+.cardContent {
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem;
+}
+
+/* Footer */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem;
+  gap: 0.5rem;
+}
+
+/* Utility modifier: when footer has a top border, add top padding like [.border-t]:pt-6 */
+.borderTop {
+  border-top: 1px solid var(--card-border);
+  padding-top: 1.5rem;
+}
+
+/* Utility modifier: when header should show a bottom border and extra pad */
+.headerBorderBottom {
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 1.5rem;
+}

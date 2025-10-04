@@ -1,0 +1,91 @@
+// form.module.scss
+// Nested SCSS for the form components. Adjust colors/spacing to match your design system.
+
+$gap: 0.5rem; // equivalent to gap-2
+$muted-foreground: #6b7280;
+$label-color: #111827;
+$destructive: #dc2626;
+$font-size-sm: 0.875rem;
+$control-border: #d1d5db;
+$control-focus: #3b82f6;
+$radius: 6px;
+
+.formItem {
+  display: grid;
+  gap: $gap;
+
+  // style elements inside a form item when using data-slot markers (fallback selectors)
+  &[data-slot="form-item"] {
+    display: grid;
+  }
+
+  // Default label styling
+  .formLabel {
+    font-weight: 500;
+    color: $label-color;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    display: inline-block;
+
+    // When the Label has the data-error attribute set
+    &[data-error="true"] {
+      color: $destructive;
+    }
+  }
+
+  // Generic control container styling (inputs / selects can inherit this class)
+  .formControl {
+    width: 100%;
+    display: block;
+
+    // If aria-invalid is true, style accordingly (red outline)
+    &[aria-invalid="true"] {
+      outline: 2px solid rgba(220, 38, 38, 0.08);
+      border-radius: $radius;
+    }
+
+    // Provide a simple focus style for children that are focusable
+    :focus-within {
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+      border-radius: $radius;
+    }
+  }
+
+  // Description text below input
+  .formDescription {
+    color: $muted-foreground;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+
+  // Error or helper message text
+  .formMessage {
+    color: $destructive;
+    font-size: $font-size-sm;
+    margin: 0;
+  }
+
+  // Generic error helper class (can be applied to label/message)
+  .error {
+    color: $destructive !important;
+  }
+
+  // Generic invalid helper
+  .invalid {
+    border-color: $destructive;
+  }
+}
+
+/* Provide top-level attribute-targeted rules too (useful if someone uses the data-slot attributes directly) */
+// [data-slot="form-label"] {
+//   // base fallback
+//   font-weight: 500;
+// }
+// [data-slot="form-description"] {
+//   color: $muted-foreground;
+//   font-size: $font-size-sm;
+// }
+// [data-slot="form-message"] {
+//   color: $destructive;
+//   font-size: $font-size-sm;
+// }

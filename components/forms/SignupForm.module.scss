@@ -1,0 +1,166 @@
+// SignupForm.module.scss
+// Nested SCSS to mirror prior Tailwind usage.
+// Adjust colors / tokens to match your design system.
+
+$gap-6: 1.5rem; // Tailwind gap-6
+$gap-4: 1rem;
+$gap-3: 0.75rem;
+$space-y-8: 2rem;
+
+$muted-foreground: #6b7280;
+$card-bg: #ffffff;
+$border: #e5e7eb;
+$text-color: #111827;
+$primary: #2563eb;
+$destructive: #dc2626;
+$radius: 8px;
+$font-sm: 0.875rem;
+$font-xs: 0.75rem;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-6;
+
+  // Card header
+  .cardHeader {
+    text-align: center;
+  }
+
+  .cardTitle {
+    font-size: 1.25rem; // text-xl
+    margin: 0;
+  }
+
+  .cardDescription {
+    margin-top: 0.25rem;
+    color: $muted-foreground;
+    font-size: $font-sm;
+  }
+
+  // Form element spacing (space-y-8)
+  .form {
+    margin: 0;
+    width: 100%;
+
+    > .innerGrid {
+      display: grid;
+      gap: $gap-6;
+    }
+  }
+
+  // Social button wrapper (full width button inside)
+  .socialWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-4;
+
+    // ensure button stretches
+    .fullWidth {
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  // helper class used on Button elements
+  .fullWidth {
+    width: 100%;
+  }
+
+  // Divider with centered text and an ::after border line
+  .divider {
+    position: relative;
+    text-align: center;
+    font-size: $font-sm;
+    color: $muted-foreground;
+    margin: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 1px solid $border;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .dividerText {
+      position: relative;
+      z-index: 1;
+      background: $card-bg;
+      padding: 0 0.5rem;
+      display: inline-block;
+    }
+  }
+
+  // Grid containing the input fields and actions
+  .fieldsGrid {
+    display: grid;
+    gap: $gap-6;
+  }
+
+  .fieldGroup {
+    display: grid;
+    gap: $gap-3;
+  }
+
+  .passwordRow {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-4;
+    position: relative;
+  }
+
+  .forgotLink {
+    margin-left: auto;
+    font-size: $font-sm;
+    text-decoration: none;
+    align-self: flex-end;
+    color: $primary;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Footer text: "Already have an account? Login"
+  .footerText {
+    text-align: center;
+    font-size: $font-sm;
+    color: $muted-foreground;
+
+    .loginLink {
+      margin-left: 0.25rem;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Legal small text at bottom
+  .legal {
+    text-align: center;
+    color: $muted-foreground;
+    font-size: $font-xs;
+    line-height: 1.2;
+
+    .legalLink {
+      color: $muted-foreground;
+      text-decoration: none;
+      &:hover {
+        color: $primary;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Fallback / per-class top-level selectors (helpful if a consumer uses the class directly) */
+.cardHeader {
+  text-align: center;
+}
